@@ -263,6 +263,12 @@ function ProductList(props) {
             ...prevState,
             [product.name]: true // Set the product name as key and value as true to indicate it's added to cart
         }));
+
+      const handleRemoveFromCart = (product) => {
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [product.name]: false // Set the product name as key and value as true to indicate it's removed from cart
+        }));
     };
 
     return (
@@ -315,7 +321,7 @@ function ProductList(props) {
         ) :  (
         <CartItem 
         onContinueShopping={handleContinueShopping}
-        setAddedToCart={setAddedToCart}/>
+        onRemoveFromCart={handleRemoveFromCart}/>
         )}
         </div>
     );
