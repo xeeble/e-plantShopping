@@ -273,7 +273,7 @@ function ProductList() {
                <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
                <a href="/" style={{textDecoration:'none'}}>
                         <div>
-                    <h3 style={{color:'white'}}>Paradise Nursery</h3>
+                    <h3 style={{color:'white'}}>Paul's Plants</h3>
                     <i style={{color:'white'}}>Where Green Meets Serenity</i>
                     </div>
                     </a>
@@ -289,7 +289,7 @@ function ProductList() {
         <div className="product-grid">
             {plantsArray.map((category, index) => (
             <div key={index}>
-                <h1><div>{category.category}</div></h1>
+                <h1><div className="product-category">{category.category}</div></h1>
                 <div className="product-list">
                     {category.plants.map((plant, plantIndex) => (
                     <div className="product-card" key={plantIndex}>
@@ -298,21 +298,20 @@ function ProductList() {
                         {/*Similarly like the above plant.name show other details like description and cost*/}
                         <div className="product-description">{plant.description}</div>
                         <div className="product-price">{plant.cost}</div>
-                        {addedToCart[plant.name] ? (
-                        <button className="product-button added-to-cart" disabled>
-                            Added to Cart
-                        </button>
-                    ) : (
-                        <button className="product-button" onClick={() => handleAddToCart(plant)}>
-                            Add to Cart
-                        </button>
-                    )}
+                        <button 
+                        className={`product-button ${addedToCart[plant.name] ? 'added-to-cart' : ''}`}
+                        disabled={addedToCart[plant.name]}
+                        onClick={() => !addedToCart[plant.name] && handleAddToCart(plant)}
+                      >
+                        {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                      </button>
+                    
+                    </div>
+                ))}
                 </div>
+            </div>
             ))}
-        </div>
-        </div>
-         ))}
-        </div>
+            </div>
         ) :  (
         <CartItem 
         onContinueShopping={handleContinueShopping}

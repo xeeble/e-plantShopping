@@ -30,7 +30,7 @@ export const CartSlice = createSlice({
             itemToUpdate.quantity = quantity;
         }
         if(itemToUpdate.quantity === 0){
-            removeItem(itemToUpdate);
+            state.items = state.items.filter(item => item.name !== name);
         }
      
     },
