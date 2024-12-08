@@ -32,6 +32,10 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleRemove = (item) => {
         dispatch(removeItem(item));
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [item.name]: false
+          }));
   };
 
   // Calculate total cost based on quantity for an item
@@ -43,8 +47,13 @@ const CartItem = ({ onContinueShopping }) => {
     alert('Functionality to be added for future reference');
   };
 
+  const calculateTotalPlantAmount = () =>{
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  }
+
   return (
     <div className="cart-container">
+        <h2 style={{ color: 'black' }}>Total Plant Amount: {calculateTotalPlantAmount()}</h2>
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
       <div>
         {cart.map(item => (
